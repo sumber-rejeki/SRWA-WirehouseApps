@@ -90,7 +90,7 @@
         android:hint="ID product, name product, etc"
         android:textSize="15sp"
         android:padding="5dp"
-        android:background="@drawable/search_input_background"
+        android:background="@drawable/outline_background"
         android:textColor="@color/lightGrey"
         android:textColorHint="@color/lightGrey"
         android:drawableLeft="@drawable/searchicon"
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp">
 
-            <!-- Contoh Konten -->
+
             <TextView
                 android:id="@+id/textViewContent"
                 android:layout_width="0dp"
@@ -126,7 +126,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/button"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintHorizontal_bias="0"/>
@@ -139,14 +138,54 @@
                 android:layout_height="30dp"
                 android:drawableLeft="@drawable/printicon"
                 android:drawablePadding="5dp"
+                android:layout_marginTop="5dp"
                 android:paddingLeft="8dp"
-                android:background="@drawable/search_input_background"
+                android:background="@drawable/outline_background"
                 android:textColor="@color/lightGrey"
                 android:textAlignment="textStart"
                 android:text="Print"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textViewContent"
                 app:layout_constraintBottom_toBottomOf="@id/textViewContent"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/textViewContent"/>
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avg. monthly wirehouse"
+                android:textColor="@color/lightGrey"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="@+id/textViewContent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+<!--            <com.dewakoding.androidchartjs.AndroidChartJSView-->
+<!--                android:id="@+id/androidchart1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/barChart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
