@@ -47,6 +47,7 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation("androidx.activity:activity:1.9.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -67,4 +68,7 @@ dependencies {
     //chart js
     implementation ("com.github.SeptiawanAjiP:AndroidChartJS:1.0.5")
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //scanQR
+    implementation ("com.github.yuriy-budiyev:code-scanner:2.3.0")
 }
