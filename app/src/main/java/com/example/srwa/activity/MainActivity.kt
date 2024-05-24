@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.srwa.R
 import com.example.srwa.databinding.ActivityMainBinding
 import com.example.srwa.ui.DashboardFragment
+import com.example.srwa.ui.FabricFragment
 import com.example.srwa.ui.InputFragment
 import com.example.srwa.ui.OutputFragment
 import com.example.srwa.ui.ProductionFragment
@@ -58,6 +59,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.fragment_container, InputFragment())
+//                .commit()
+//        }
+
+
     }
 
     private fun replace(fragment: Fragment) {
