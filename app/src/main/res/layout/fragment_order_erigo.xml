@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkGrey"
+    android:padding="10dp"
+    tools:context=".ui.OrderErigoFragment">
+
+    <!-- TODO: Update Order Erigo fragment layout -->
+
+    <EditText
+        android:id="@+id/search_erigo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/outline_background"
+        android:drawableLeft="@drawable/seach_icon_custom"
+        android:drawablePadding="8dp"
+        android:hint="ID product, name product, etc"
+        android:padding="12dp"
+        android:paddingBottom="50dp"
+        android:textColor="@color/lightGrey"
+        android:textColorHint="@color/lightGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutErigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-1dp">
+
+
+        <TextView
+            android:id="@+id/erigo_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Erigo"
+            android:textColor="@color/lightGrey"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Subtitle Material Details -->
+        <TextView
+            android:id="@+id/order_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Order details"
+            android:textColor="@color/lightGrey"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="24/05/2024"
+        android:textColor="@color/lightGrey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_erigo" />
+
+    <!-- Tombol Print di kanan bawah tanggal -->
+    <Button
+        android:id="@+id/btn_print_erigo"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:drawableLeft="@drawable/printicon"
+        android:paddingTop="2dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="8dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/outline_background"
+        android:textColor="@color/lightGrey"
+        android:textAlignment="textEnd"
+        android:text="Print"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_date" />
+
+
+    <LinearLayout
+        android:id="@+id/table_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="5dp">
+
+        <TableLayout
+            android:id="@+id/bar_order"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/outline_background"
+            android:stretchColumns="*"
+            app:layout_constraintTop_toBottomOf="@id/order_details">
+
+
+            <TextView
+                android:id="@+id/tvOrderId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Order ID" />
+
+            <TextView
+                android:id="@+id/tvOrderDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Date" />
+
+            <TextView
+                android:id="@+id/tvOrderStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Status" />
+
+            <TextView
+                android:id="@+id/tvShippingDestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shipping Destination" />
+
+        </TableLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view2"
+            android:layout_width="152dp"
+            android:layout_height="101dp"
+            app:layout_constraintTop_toBottomOf="@id/btn_print_erigo"
+            tools:ignore="NotSibling" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

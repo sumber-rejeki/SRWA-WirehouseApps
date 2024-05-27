@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <TableLayout
+        android:id="@+id/bar_order"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/outline_background"
+        android:stretchColumns="*">
+
+
+        <TextView
+            android:id="@+id/tvOrderId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Order ID" />
+
+        <TextView
+            android:id="@+id/tvOrderDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Date" />
+
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Status" />
+
+        <TextView
+            android:id="@+id/tvShippingDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shipping Destination" />
+
+    </TableLayout>
+
+</LinearLayout>
