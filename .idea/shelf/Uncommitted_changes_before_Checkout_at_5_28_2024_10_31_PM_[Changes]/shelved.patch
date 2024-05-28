@@ -1,0 +1,40 @@
+Index: app/src/main/res/layout/fragment_fabric.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@color/darkGrey\"\r\n    android:padding=\"10dp\"\r\n    tools:context=\".ui.FabricFragment\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/search_box\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"48dp\"\r\n        android:background=\"@drawable/outline_background\"\r\n        android:drawableLeft=\"@drawable/seach_icon_custom\"\r\n        android:drawablePadding=\"8dp\"\r\n        android:hint=\"ID product, name product, etc\"\r\n        android:padding=\"12dp\"\r\n        android:paddingBottom=\"50dp\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textColorHint=\"#C0C0C0\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/linearLayout3\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"120dp\"\r\n        android:orientation=\"vertical\"\r\n        android:padding=\"16dp\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        tools:layout_editor_absoluteX=\"-1dp\">\r\n        <!-- Bagian Fabric -->\r\n        <TextView\r\n            android:id=\"@+id/fabric_title\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginBottom=\"8dp\"\r\n            android:text=\"Fabric\"\r\n            android:textColor=\"#FFFFFF\"\r\n            android:textSize=\"18sp\"\r\n            android:textStyle=\"bold\" />\r\n\r\n        <!-- Subtitle Material Details -->\r\n        <TextView\r\n            android:id=\"@+id/material_details\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginBottom=\"16dp\"\r\n            android:text=\"Material details\"\r\n            android:textColor=\"#C0C0C0\"\r\n            android:textSize=\"14sp\" />\r\n    </LinearLayout>\r\n\r\n    <TextView\r\n        android:id=\"@+id/tv_date\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"22/05/2024\"\r\n        android:textColor=\"#FFA500\"\r\n        android:textSize=\"16sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/search_box\" />\r\n\r\n    <!-- Tombol Print di kanan bawah tanggal -->\r\n    <Button\r\n        android:id=\"@+id/btn_print\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"30dp\"\r\n        android:drawableLeft=\"@drawable/printicon\"\r\n        android:paddingTop=\"2dp\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:paddingLeft=\"8dp\"\r\n        android:paddingBottom=\"5dp\"\r\n        android:background=\"@drawable/outline_background\"\r\n        android:textColor=\"@color/lightGrey\"\r\n        android:textAlignment=\"textEnd\"\r\n        android:text=\"Print\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/tv_date\" />\r\n\r\n\r\n    <TableLayout\r\n        android:id=\"@+id/bar\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@drawable/outline_background\"\r\n        android:stretchColumns=\"*\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/linearLayout3\"\r\n        tools:layout_editor_absoluteX=\"10dp\">\r\n\r\n        <TableRow>\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:padding=\"8dp\"\r\n                android:text=\"ID\"\r\n\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:padding=\"8dp\"\r\n                android:text=\"Type\"\r\n\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:gravity=\"center\"\r\n                android:padding=\"8dp\"\r\n                android:text=\"Color\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:gravity=\"center\"\r\n                android:padding=\"8dp\"\r\n                android:text=\"Qty (m)\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\" />\r\n        </TableRow>\r\n    </TableLayout>\r\n\r\n    <!-- Baris Header -->\r\n\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/recycler_view\"\r\n        android:layout_width=\"373dp\"\r\n        android:layout_height=\"529dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.0\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/bar\"\r\n        app:layout_constraintVertical_bias=\"0.319\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_fabric.xml b/app/src/main/res/layout/fragment_fabric.xml
+--- a/app/src/main/res/layout/fragment_fabric.xml	(revision 70a557579b32c5bb635982cd5e55ab6c79ea8374)
++++ b/app/src/main/res/layout/fragment_fabric.xml	(date 1716910124605)
+@@ -139,16 +139,21 @@
+     <!-- Baris Header -->
+ 
+ 
+-    <androidx.recyclerview.widget.RecyclerView
+-        android:id="@+id/recycler_view"
+-        android:layout_width="373dp"
+-        android:layout_height="529dp"
++    <androidx.core.widget.NestedScrollView
++        android:layout_width="0dp"
++        android:layout_height="425dp"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.0"
++        app:layout_constraintHorizontal_bias="1.0"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/bar"
+-        app:layout_constraintVertical_bias="0.319" />
++        app:layout_constraintTop_toBottomOf="@id/bar"
++        app:layout_constraintVertical_bias="0.056">
++
++        <androidx.recyclerview.widget.RecyclerView
++            android:id="@+id/recycler_view"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content" />
++    </androidx.core.widget.NestedScrollView>
+ 
+ 
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file

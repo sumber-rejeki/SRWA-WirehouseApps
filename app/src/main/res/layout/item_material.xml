@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="8dp"
-    android:background="@drawable/outline_background">
+    android:background="@drawable/outline_background2">
 
     <TextView
         android:id="@+id/tv_id"
