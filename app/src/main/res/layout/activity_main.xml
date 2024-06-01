@@ -29,7 +29,7 @@
         app:menu="@menu/menu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/nav"
+        android:id="@+id/btnScanQR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/orange"
