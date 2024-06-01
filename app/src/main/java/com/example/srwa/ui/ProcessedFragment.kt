@@ -23,6 +23,18 @@ class ProcessedFragment : Fragment() {
             navigateToFragment(OrderErigoFragment())
         }
 
+        view.findViewById<CardView>(R.id.cardCrooz).setOnClickListener {
+            navigateToFragment(OrderCroozFragment())
+        }
+
+        view.findViewById<CardView>(R.id.cardHeyho).setOnClickListener {
+            navigateToFragment(OrderHeyhoFragment())
+        }
+
+        view.findViewById<CardView>(R.id.cardKickout).setOnClickListener {
+            navigateToFragment(OrderKickoutFragment())
+        }
+
         return view
     }
 

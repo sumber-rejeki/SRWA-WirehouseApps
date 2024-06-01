@@ -19,10 +19,10 @@ class OrderAdapter(private val orders: List<Order>) :
     RecyclerView.Adapter<OrderAdapter.OrderViewHolder>() {
 
     inner class OrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvOrderId: TextView = itemView.findViewById(R.id.tvOrderId)
-        val tvOrderDate: TextView = itemView.findViewById(R.id.tvOrderDate)
-        val tvOrderStatus: TextView = itemView.findViewById(R.id.tvOrderStatus)
-        val tvShippingDestination: TextView = itemView.findViewById(R.id.tvShippingDestination)
+        val tvOrderId: TextView = itemView.findViewById(R.id.orderID)
+        val tvOrderDate: TextView = itemView.findViewById(R.id.orderDate)
+        val tvOrderStatus: TextView = itemView.findViewById(R.id.orderStatus)
+        val tvShippingDestination: TextView = itemView.findViewById(R.id.shippingDestination)
 
     }
 

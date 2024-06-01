@@ -22,6 +22,14 @@ class OutputFragment : Fragment() {
             navigateToFragment(ShippingFragment())
         }
 
+        view.findViewById<CardView>(R.id.cardProduct).setOnClickListener {
+            navigateToFragment(ProductionFragment())
+        }
+
+        view.findViewById<CardView>(R.id.cardMaterials).setOnClickListener {
+            navigateToFragment(InputFragment())
+        }
+
         return view
     }
 

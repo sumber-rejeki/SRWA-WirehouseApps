@@ -105,7 +105,6 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="ID"
-
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
@@ -114,7 +113,6 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:text="Type"
-
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 
@@ -142,7 +140,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view2"
         android:layout_width="373dp"
         android:layout_height="529dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -150,6 +148,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bar"
-        app:layout_constraintVertical_bias="0.319" />
+        app:layout_constraintVertical_bias="0.468" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
