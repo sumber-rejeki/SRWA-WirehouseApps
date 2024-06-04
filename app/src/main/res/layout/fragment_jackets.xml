@@ -93,7 +93,7 @@
         android:id="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/outline_background"
+        android:background="@drawable/outline_background2"
         android:stretchColumns="*"
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutJackets"
         tools:layout_editor_absoluteX="10dp">
@@ -139,15 +139,20 @@
     <!-- Baris Header -->
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view2"
-        android:layout_width="373dp"
-        android:layout_height="529dp"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bar"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintTop_toBottomOf="@id/bar"
+        app:layout_constraintVertical_bias="0.056">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

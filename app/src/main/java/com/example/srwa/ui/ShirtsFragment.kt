@@ -21,7 +21,7 @@ class ShirtsFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_shirts, container, false)
 
         // Inisialisasi RecyclerView
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
+        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view2)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = TableAdapter(generateDummyMaterials())
 
