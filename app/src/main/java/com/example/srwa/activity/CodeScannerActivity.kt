@@ -3,11 +3,9 @@ package com.example.srwa.activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -17,11 +15,13 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.example.srwa.R
 import com.example.srwa.databinding.ActivityCodeScannerBinding
+import com.example.srwa.ui.CustomInputDialogFragment
 
 class CodeScannerActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityCodeScannerBinding
-    lateinit var codeScanner : CodeScanner
+    lateinit var binding: ActivityCodeScannerBinding
+    lateinit var codeScanner: CodeScanner
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCodeScannerBinding.inflate(layoutInflater)
@@ -37,7 +37,6 @@ class CodeScannerActivity : AppCompatActivity() {
         setPermission()
     }
 
-
     private fun codeScanner() {
         codeScanner = CodeScanner(this, binding.scanner)
 
@@ -51,14 +50,16 @@ class CodeScannerActivity : AppCompatActivity() {
             isFlashEnabled = false
 
             decodeCallback = DecodeCallback {
-                runOnUiThread{
+                runOnUiThread {
                     binding.outputQr.text = it.text
+                    showCustomDialog(it.text)  // Pass the scanned QR code data
+                    codeScanner.stopPreview()  // Stop the scanner after reading the data
                 }
             }
 
             errorCallback = ErrorCallback {
-                runOnUiThread{
-                    Toast.makeText(applicationContext,"${it.message}", Toast.LENGTH_SHORT).show()
+                runOnUiThread {
+                    Toast.makeText(applicationContext, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -68,6 +69,11 @@ class CodeScannerActivity : AppCompatActivity() {
         }
     }
 
+    private fun showCustomDialog(qrData: String) {
+        val dialog = CustomInputDialogFragment.newInstance(qrData)
+        dialog.show(supportFragmentManager, "CustomInputDialogFragment")
+    }
+
     override fun onResume() {
         super.onResume()
         codeScanner.startPreview()
@@ -75,13 +81,13 @@ class CodeScannerActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        codeScanner.startPreview()
+        codeScanner.releaseResources() // Use releaseResources to properly release the camera
     }
 
     private fun setPermission() {
         val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)
 
-        if (permission != PackageManager.PERMISSION_GRANTED){
+        if (permission != PackageManager.PERMISSION_GRANTED) {
             makeReq()
         }
     }
@@ -93,19 +99,15 @@ class CodeScannerActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
+        when (requestCode) {
             101 -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED)
+                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "Permission dibutuhkan", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
-
 }
-
-
