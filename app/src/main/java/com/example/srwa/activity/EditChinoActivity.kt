@@ -54,7 +54,7 @@ class EditChinoActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(this@EditChinoActivity, "Failed to load yarn data", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@EditChinoActivity, "Failed to load chino data", Toast.LENGTH_SHORT).show()
             }
         })
     }

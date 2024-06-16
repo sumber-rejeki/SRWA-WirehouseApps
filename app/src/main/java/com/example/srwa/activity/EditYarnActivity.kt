@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.srwa.Model.Fabric
 import com.example.srwa.Model.Yarn
 import com.example.srwa.R
 import com.google.firebase.database.FirebaseDatabase
@@ -40,11 +41,11 @@ class EditYarnActivity : AppCompatActivity() {
             deleteYarnFromDatabase()
         }
 
-        // Retrieve Yarn details from the database and populate the EditText fields
+        // Retrieve Fabric details from the database and populate the EditText fields
         val database = FirebaseDatabase.getInstance().reference.child("yarns").child(yarnId)
         database.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val yarn = dataSnapshot.getValue(Yarn::class.java)
+                val yarn = dataSnapshot.getValue(Fabric::class.java)
                 yarn?.let {
                     typeEditText.setText(it.type)
                     colorEditText.setText(it.color)
@@ -79,7 +80,7 @@ class EditYarnActivity : AppCompatActivity() {
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Failed to update yarn", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Yarn to update fabric", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -91,7 +92,7 @@ class EditYarnActivity : AppCompatActivity() {
                 finish()
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Failed to delete yarn", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to delete Yarn", Toast.LENGTH_SHORT).show()
             }
     }
 }

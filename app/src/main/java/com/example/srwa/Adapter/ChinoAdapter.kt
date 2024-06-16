@@ -54,7 +54,7 @@ class ChinoAdapter(private val chinoList: ArrayList<Chino>, private val context:
     }
 
     private fun deleteChino(chino: Chino) {
-        val database = FirebaseDatabase.getInstance().reference.child("chino").child(chino.id)
+        val database = FirebaseDatabase.getInstance().reference.child("chinos").child(chino.id)
         database.removeValue()
             .addOnSuccessListener {
                 Toast.makeText(context, "Chino deleted successfully", Toast.LENGTH_SHORT).show()

@@ -31,19 +31,19 @@ class YarnAdapter(private val yarntList: ArrayList<Yarn>, private val context: C
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val yarnfragment = yarntList[position]
-        holder.id.text = yarnfragment.id
-        holder.type.text = yarnfragment.type
-        holder.color.text = yarnfragment.color
-        holder.quantity.text = yarnfragment.qty.toString()
+        val yarn = yarntList[position]
+        holder.id.text = yarn.id
+        holder.type.text = yarn.type
+        holder.color.text = yarn.color
+        holder.quantity.text = yarn.qty.toString()
 
         holder.deleteButton.setOnClickListener {
-            deleteYarnFragment(yarnfragment)
+            deleteYarnFragment(yarn)
         }
 
         holder.editButton.setOnClickListener {
             val intent = Intent(context, EditYarnActivity::class.java).apply {
-                putExtra("yarnfragmentId", yarnfragment.id)
+                putExtra("yarnId", yarn.id)
             }
             context.startActivity(intent)
         }
@@ -54,15 +54,15 @@ class YarnAdapter(private val yarntList: ArrayList<Yarn>, private val context: C
     }
 
     private fun deleteYarnFragment(yarn: Yarn) {
-        val database = FirebaseDatabase.getInstance().reference.child("yarnfragments").child(yarn.id)
+        val database = FirebaseDatabase.getInstance().reference.child("yarns").child(yarn.id)
         database.removeValue()
             .addOnSuccessListener {
-                Toast.makeText(context, "YarnFragment deleted successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Yarn deleted successfully", Toast.LENGTH_SHORT).show()
                 yarntList.remove(yarn)
                 notifyDataSetChanged()
             }
             .addOnFailureListener {
-                Toast.makeText(context, "Failed to delete YarnFragment", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Failed to delete Yarn", Toast.LENGTH_SHORT).show()
             }
     }
 }
