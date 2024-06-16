@@ -9,12 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.srwa.Model.Fabric
+import com.example.srwa.Model.Chino
 import com.example.srwa.R
-import com.example.srwa.activity.EditFabricActivity
+import com.example.srwa.activity.EditChinoActivity
 import com.google.firebase.database.FirebaseDatabase
 
-class FabricAdapter(private val fabricList: ArrayList<Fabric>, private val context: Context) : RecyclerView.Adapter<FabricAdapter.ViewHolder>() {
+class ChinoAdapter(private val chinoList: ArrayList<Chino>, private val context: Context) : RecyclerView.Adapter<ChinoAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val id: TextView = itemView.findViewById(R.id.textViewId)
@@ -26,43 +26,43 @@ class FabricAdapter(private val fabricList: ArrayList<Fabric>, private val conte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fabric_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.chino_layout, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val fabric = fabricList[position]
-        holder.id.text = fabric.id
-        holder.type.text = fabric.type
-        holder.color.text = fabric.color
-        holder.quantity.text = fabric.qty.toString()
+        val chino = chinoList[position]
+        holder.id.text = chino.id
+        holder.type.text = chino.type
+        holder.color.text = chino.color
+        holder.quantity.text = chino.qty.toString()
 
         holder.deleteButton.setOnClickListener {
-            deleteFabric(fabric)
+            deleteChino(chino)
         }
 
         holder.editButton.setOnClickListener {
-            val intent = Intent(context, EditFabricActivity::class.java).apply {
-                putExtra("fabricId", fabric.id)
+            val intent = Intent(context, EditChinoActivity::class.java).apply {
+                putExtra("chinoId", chino.id)
             }
             context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int {
-        return fabricList.size
+        return chinoList.size
     }
 
-    private fun deleteFabric(fabric: Fabric) {
-        val database = FirebaseDatabase.getInstance().reference.child("fabrics").child(fabric.id)
+    private fun deleteChino(chino: Chino) {
+        val database = FirebaseDatabase.getInstance().reference.child("chino").child(chino.id)
         database.removeValue()
             .addOnSuccessListener {
-                Toast.makeText(context, "Fabric deleted successfully", Toast.LENGTH_SHORT).show()
-                fabricList.remove(fabric)
+                Toast.makeText(context, "Chino deleted successfully", Toast.LENGTH_SHORT).show()
+                chinoList.remove(chino)
                 notifyDataSetChanged()
             }
             .addOnFailureListener {
-                Toast.makeText(context, "Failed to delete fabric", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Failed to delete chino", Toast.LENGTH_SHORT).show()
             }
     }
 }

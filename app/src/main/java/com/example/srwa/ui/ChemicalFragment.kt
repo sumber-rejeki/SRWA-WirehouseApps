@@ -1,42 +1,68 @@
 package com.example.srwa.ui
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.srwa.Adapter.Material
-import com.example.srwa.Adapter.MaterialAdapter
-import com.example.srwa.R
-
+import com.example.srwa.Adapter.ChemicalAdapter
+import com.example.srwa.Model.Chemical
+import com.example.srwa.activity.AddChemicalActivity
+import com.example.srwa.databinding.FragmentChemicalBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ChemicalFragment : Fragment() {
+
+    private lateinit var binding: FragmentChemicalBinding
+    private lateinit var chemicalList: ArrayList<Chemical>
+    private lateinit var chemicalAdapter: ChemicalAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_chemical, container, false)
-
-        // Inisialisasi RecyclerView
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = MaterialAdapter(generateDummyMaterials())
-
-        return view
+        binding = FragmentChemicalBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun generateDummyMaterials(): List<Material> {
-        return listOf(
-            Material("C01", "Dyes", "Dark Green", 20),
-            Material("C02", "Dyes", "Black", 25),
-            Material("C03", "Dyes", "Blue", 30),
-            Material("C04", "Dyes", "White", 35),
-            Material("C05", "Binders", "Grey", 40),
-            Material("C06", "Bleaching Agents", "Grey", 40),
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        )
+        chemicalList = arrayListOf()
+        chemicalAdapter = ChemicalAdapter(chemicalList, requireContext()) // Menggunakan requireContext()
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = chemicalAdapter
+
+        binding.buttonAdd.setOnClickListener {
+            startActivity(Intent(requireContext(), AddChemicalActivity::class.java))
+        }
+
+        loadItemsFromDatabase()
+    }
+
+    private fun loadItemsFromDatabase() {
+        val database = FirebaseDatabase.getInstance().reference.child("chemicals")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                chemicalList.clear()
+                for (dataSnapshot in snapshot.children) {
+                    val chemical = dataSnapshot.getValue(Chemical::class.java)
+                    chemical?.let {
+                        chemicalList.add(it)
+                    }
+                }
+                chemicalAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

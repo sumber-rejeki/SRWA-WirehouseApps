@@ -130,9 +130,25 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:padding="8dp"
-                android:text="Qty (m)"
+                android:text="Size"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
+
+            <TextView
+                android:text="✓"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                />
+
+            <TextView
+                android:text="✗"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
         </TableRow>
     </TableLayout>
 

@@ -1,48 +1,68 @@
 package com.example.srwa.ui
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.srwa.Adapter.Material
-import com.example.srwa.Adapter.MaterialAdapter
-import com.example.srwa.R
-
+import com.example.srwa.Adapter.YarnAdapter
+import com.example.srwa.Model.Yarn
+import com.example.srwa.activity.AddYarnActivity
+import com.example.srwa.databinding.FragmentYarnBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class YarnFragment : Fragment() {
+
+    private lateinit var binding: FragmentYarnBinding
+    private lateinit var yarnList: ArrayList<Yarn>
+    private lateinit var yarnAdapter: YarnAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_yarn, container, false)
-
-        // Inisialisasi RecyclerView
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = MaterialAdapter(generateDummyMaterials())
-
-        return view
+        binding = FragmentYarnBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun generateDummyMaterials(): List<Material> {
-        return listOf(
-            Material("Y01", "Polyester Yarn", "Dark Green", 20),
-            Material("Y02", "Polyester Yarn", "Black", 25),
-            Material("Y03", "Polyester Yarn", "Blue", 30),
-            Material("Y04", "Polyester Yarn", "White", 35),
-            Material("Y05", "Polyester Yarn", "Grey", 40),
-            Material("Y06", "Cotton Yarn", "White", 40),
-            Material("Y07", "Cotton Yarn", "Beige", 45),
-            Material("Y08", "Cotton Yarn", "Black", 50),
-            Material("Y09", "Cotton Yarn", "Navy", 55),
-            Material("Y10", "Nylon Yarn", "Beige", 60),
-            Material("Y11", "Nylon Yarn", "Black", 65),
-            Material("Y12","Nylon Yarn","Navy",60)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        )
+        yarnList = arrayListOf()
+        yarnAdapter = YarnAdapter(yarnList, requireContext()) // Menggunakan requireContext()
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = yarnAdapter
+
+        binding.buttonAdd.setOnClickListener {
+            startActivity(Intent(requireContext(), AddYarnActivity::class.java))
+        }
+
+        loadItemsFromDatabase()
+    }
+
+    private fun loadItemsFromDatabase() {
+        val database = FirebaseDatabase.getInstance().reference.child("yarns")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                yarnList.clear()
+                for (dataSnapshot in snapshot.children) {
+                    val yarn = dataSnapshot.getValue(Yarn::class.java)
+                    yarn?.let {
+                        yarnList.add(it)
+                    }
+                }
+                yarnAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

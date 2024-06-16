@@ -12,12 +12,42 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SRWA"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.EditChemicalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddChemicalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditChinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddChinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditYarnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddYarnActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.InputActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.EditFabricActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddFabricActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.CodeScannerActivity"
             android:exported="false" />

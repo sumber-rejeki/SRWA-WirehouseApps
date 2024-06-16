@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.srwa.R
 import com.example.srwa.databinding.ActivityMainBinding
 import com.example.srwa.ui.DashboardFragment
-import com.example.srwa.ui.FabricFragment
+
 import com.example.srwa.ui.InputFragment
 import com.example.srwa.ui.OutputFragment
 import com.example.srwa.ui.ProductionFragment

@@ -1,48 +1,68 @@
 package com.example.srwa.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.example.srwa.R
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.srwa.Adapter.Material
-import com.example.srwa.Adapter.MaterialAdapter
-
-
+import com.example.srwa.Adapter.FabricAdapter
+import com.example.srwa.Model.Fabric
+import com.example.srwa.activity.AddFabricActivity
+import com.example.srwa.databinding.FragmentFabricBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class FabricFragment : Fragment() {
+
+    private lateinit var binding: FragmentFabricBinding
+    private lateinit var fabricList: ArrayList<Fabric>
+    private lateinit var fabricAdapter: FabricAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_fabric, container, false)
-
-        // Inisialisasi RecyclerView
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = MaterialAdapter(generateDummyMaterials())
-
-        return view
+        binding = FragmentFabricBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun generateDummyMaterials(): List<Material> {
-        return listOf(
-            Material("F01", "Cotton", "White", 20),
-            Material("F02", "Cotton", "Beige", 25),
-            Material("F03", "Cotton", "Navy", 30),
-            Material("F04", "Cotton", "Black", 35),
-            Material("F05", "Denim", "Indigo Blue", 40),
-            Material("F06", "Denim", "Black", 40),
-            Material("F07", "Denim", "Light Blue", 45),
-            Material("F08", "Polyester", "Dark Green", 50),
-            Material("F09", "Polyester", "Black", 55),
-            Material("F10", "Polyester", "Grey", 60),
-            Material("F11", "Polyester", "Blue", 65),
-            Material("F12", "Polyester", "White", 70)
-        )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fabricList = arrayListOf()
+        fabricAdapter = FabricAdapter(fabricList, requireContext()) // Menggunakan requireContext()
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = fabricAdapter
+
+        binding.buttonAdd.setOnClickListener {
+            startActivity(Intent(requireContext(), AddFabricActivity::class.java))
+        }
+
+        loadItemsFromDatabase()
+    }
+
+    private fun loadItemsFromDatabase() {
+        val database = FirebaseDatabase.getInstance().reference.child("fabrics")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                fabricList.clear()
+                for (dataSnapshot in snapshot.children) {
+                    val fabric = dataSnapshot.getValue(Fabric::class.java)
+                    fabric?.let {
+                        fabricList.add(it)
+                    }
+                }
+                fabricAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.srwa.Adapter.Item
 import com.example.srwa.Adapter.Order
 import com.example.srwa.Adapter.Product
 import com.example.srwa.Adapter.ProductAdapter

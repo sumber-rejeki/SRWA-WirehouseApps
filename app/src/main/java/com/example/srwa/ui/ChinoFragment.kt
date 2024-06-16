@@ -1,46 +1,68 @@
 package com.example.srwa.ui
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.srwa.Adapter.Material
-import com.example.srwa.Adapter.MaterialAdapter
-import com.example.srwa.R
-
+import com.example.srwa.Adapter.ChinoAdapter
+import com.example.srwa.Model.Chino
+import com.example.srwa.activity.AddChinoActivity
+import com.example.srwa.databinding.FragmentChinoBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class ChinoFragment : Fragment() {
+
+    private lateinit var binding: FragmentChinoBinding
+    private lateinit var chinoList: ArrayList<Chino>
+    private lateinit var chinoAdapter: ChinoAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_chino, container, false)
-
-        // Inisialisasi RecyclerView
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = MaterialAdapter(generateDummyMaterials())
-
-        return view
+        binding = FragmentChinoBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun generateDummyMaterials(): List<Material> {
-        return listOf(
-            Material("A01", "Plastic Button", "Dark Green", 20),
-            Material("A02", "Plastic Button", "Black", 25),
-            Material("A03", "Material Button", "Blue", 30),
-            Material("A04", "Material Button", "White", 35),
-            Material("A05", "Wood Button", "Grey", 40),
-            Material("A06", "Zippers", "White", 40),
-            Material("A07", "Zippers", "Beige", 45),
-            Material("A08", "Zippers", "Black", 50),
-            Material("A09", "Woven Label", "Navy", 55),
-            Material("A10", "Woven Label", "Beige", 60),
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        )
+        chinoList = arrayListOf()
+        chinoAdapter = ChinoAdapter(chinoList, requireContext()) // Menggunakan requireContext()
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerview.adapter = chinoAdapter
+
+        binding.buttonAdd.setOnClickListener {
+            startActivity(Intent(requireContext(), AddChinoActivity::class.java))
+        }
+
+        loadItemsFromDatabase()
+    }
+
+    private fun loadItemsFromDatabase() {
+        val database = FirebaseDatabase.getInstance().reference.child("chinos")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                chinoList.clear()
+                for (dataSnapshot in snapshot.children) {
+                    val chino = dataSnapshot.getValue(Chino::class.java)
+                    chino?.let {
+                        chinoList.add(it)
+                    }
+                }
+                chinoAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed to load data: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

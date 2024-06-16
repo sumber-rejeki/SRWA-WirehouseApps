@@ -9,12 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.srwa.Model.Fabric
+import com.example.srwa.Model.Chemical
 import com.example.srwa.R
-import com.example.srwa.activity.EditFabricActivity
+import com.example.srwa.activity.EditChemicalActivity
 import com.google.firebase.database.FirebaseDatabase
 
-class FabricAdapter(private val fabricList: ArrayList<Fabric>, private val context: Context) : RecyclerView.Adapter<FabricAdapter.ViewHolder>() {
+class ChemicalAdapter(private val chemicalList: ArrayList<Chemical>, private val context: Context) : RecyclerView.Adapter<ChemicalAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val id: TextView = itemView.findViewById(R.id.textViewId)
@@ -26,43 +26,43 @@ class FabricAdapter(private val fabricList: ArrayList<Fabric>, private val conte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.fabric_layout, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.chemical_layout, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val fabric = fabricList[position]
-        holder.id.text = fabric.id
-        holder.type.text = fabric.type
-        holder.color.text = fabric.color
-        holder.quantity.text = fabric.qty.toString()
+        val chemical = chemicalList[position]
+        holder.id.text = chemical.id
+        holder.type.text = chemical.type
+        holder.color.text = chemical.color
+        holder.quantity.text = chemical.qty.toString()
 
         holder.deleteButton.setOnClickListener {
-            deleteFabric(fabric)
+            deleteChemical(chemical)
         }
 
         holder.editButton.setOnClickListener {
-            val intent = Intent(context, EditFabricActivity::class.java).apply {
-                putExtra("fabricId", fabric.id)
+            val intent = Intent(context, EditChemicalActivity::class.java).apply {
+                putExtra("chemicalId", chemical.id)
             }
             context.startActivity(intent)
         }
     }
 
     override fun getItemCount(): Int {
-        return fabricList.size
+        return chemicalList.size
     }
 
-    private fun deleteFabric(fabric: Fabric) {
-        val database = FirebaseDatabase.getInstance().reference.child("fabrics").child(fabric.id)
+    private fun deleteChemical(chemical: Chemical) {
+        val database = FirebaseDatabase.getInstance().reference.child("chemicals").child(chemical.id)
         database.removeValue()
             .addOnSuccessListener {
-                Toast.makeText(context, "Fabric deleted successfully", Toast.LENGTH_SHORT).show()
-                fabricList.remove(fabric)
+                Toast.makeText(context, "Chemical deleted successfully", Toast.LENGTH_SHORT).show()
+                chemicalList.remove(chemical)
                 notifyDataSetChanged()
             }
             .addOnFailureListener {
-                Toast.makeText(context, "Failed to delete fabric", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Failed to delete chemical", Toast.LENGTH_SHORT).show()
             }
     }
 }
