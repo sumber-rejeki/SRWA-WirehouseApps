@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.EditChemicalActivity">
+
+    <TextView
+        android:id="@+id/editTextId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Chemical Type"
+        android:padding="12dp"
+        android:background="@drawable/outline_background"
+        app:layout_constraintTop_toBottomOf="@id/editTextId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextColor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Chemical Color"
+        android:padding="12dp"
+        android:background="@drawable/outline_background"
+        app:layout_constraintTop_toBottomOf="@id/editTextType"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/editTextQty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Quantity"
+        android:inputType="number"
+        android:padding="12dp"
+        android:background="@drawable/outline_background"
+        app:layout_constraintTop_toBottomOf="@id/editTextColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Update Chemical"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/editTextQty"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Delete Chemical"
+        android:padding="12dp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/buttonUpdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
