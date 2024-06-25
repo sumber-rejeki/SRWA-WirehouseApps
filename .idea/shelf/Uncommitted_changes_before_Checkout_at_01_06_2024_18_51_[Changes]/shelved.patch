@@ -1,0 +1,36 @@
+Index: app/src/main/java/com/example/srwa/activity/CodeScannerActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.srwa.activity\r\n\r\nimport android.content.pm.PackageManager\r\nimport android.os.Bundle\r\nimport android.widget.Toast\r\nimport androidx.activity.enableEdgeToEdge\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.app.ActivityCompat\r\nimport androidx.core.content.ContextCompat\r\nimport androidx.core.view.ViewCompat\r\nimport androidx.core.view.WindowInsetsCompat\r\nimport androidx.core.view.WindowInsetsControllerCompat\r\nimport com.budiyev.android.codescanner.AutoFocusMode\r\nimport com.budiyev.android.codescanner.CodeScanner\r\nimport com.budiyev.android.codescanner.DecodeCallback\r\nimport com.budiyev.android.codescanner.ErrorCallback\r\nimport com.budiyev.android.codescanner.ScanMode\r\nimport com.example.srwa.R\r\nimport com.example.srwa.databinding.ActivityCodeScannerBinding\r\n\r\nclass CodeScannerActivity : AppCompatActivity() {\r\n\r\n    lateinit var binding : ActivityCodeScannerBinding\r\n    lateinit var codeScanner : CodeScanner\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        binding = ActivityCodeScannerBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n\r\n        // Mengatur window flag agar elemen UI tidak memasuki area status bar\r\n        WindowInsetsControllerCompat(window, window.decorView).let { controller ->\r\n            controller.hide(WindowInsetsCompat.Type.statusBars())\r\n            controller.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE\r\n        }\r\n\r\n        codeScanner()\r\n        setPermission()\r\n    }\r\n\r\n\r\n    private fun codeScanner() {\r\n        codeScanner = CodeScanner(this, binding.scanner)\r\n\r\n        codeScanner.apply {\r\n            camera = CodeScanner.CAMERA_BACK\r\n            formats = CodeScanner.ALL_FORMATS\r\n\r\n            autoFocusMode = AutoFocusMode.SAFE\r\n            scanMode = ScanMode.CONTINUOUS\r\n            isAutoFocusEnabled = true\r\n            isFlashEnabled = false\r\n\r\n            decodeCallback = DecodeCallback {\r\n                runOnUiThread{\r\n                    binding.outputQr.text = it.text\r\n                }\r\n            }\r\n\r\n            errorCallback = ErrorCallback {\r\n                runOnUiThread{\r\n                    Toast.makeText(applicationContext,\"${it.message}\", Toast.LENGTH_SHORT).show()\r\n                }\r\n            }\r\n\r\n            binding.scanner.setOnClickListener {\r\n                codeScanner.startPreview()\r\n            }\r\n        }\r\n    }\r\n\r\n    override fun onResume() {\r\n        super.onResume()\r\n        codeScanner.startPreview()\r\n    }\r\n\r\n    override fun onPause() {\r\n        super.onPause()\r\n        codeScanner.startPreview()\r\n    }\r\n\r\n    private fun setPermission() {\r\n        val permission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)\r\n\r\n        if (permission != PackageManager.PERMISSION_GRANTED){\r\n            makeReq()\r\n        }\r\n    }\r\n\r\n    private fun makeReq() {\r\n        ActivityCompat.requestPermissions(\r\n            this, arrayOf(android.Manifest.permission.CAMERA), 101\r\n        )\r\n    }\r\n\r\n    override fun onRequestPermissionsResult(\r\n        requestCode: Int,\r\n        permissions: Array<out String>,\r\n        grantResults: IntArray\r\n    ) {\r\n        super.onRequestPermissionsResult(requestCode, permissions, grantResults)\r\n        when(requestCode){\r\n            101 -> {\r\n                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED)\r\n                    Toast.makeText(this, \"Permission dibutuhkan\", Toast.LENGTH_SHORT).show()\r\n            }\r\n        }\r\n    }\r\n\r\n}\r\n\r\n\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/srwa/activity/CodeScannerActivity.kt b/app/src/main/java/com/example/srwa/activity/CodeScannerActivity.kt
+--- a/app/src/main/java/com/example/srwa/activity/CodeScannerActivity.kt	
++++ b/app/src/main/java/com/example/srwa/activity/CodeScannerActivity.kt	
+@@ -48,7 +48,7 @@
+             autoFocusMode = AutoFocusMode.SAFE
+             scanMode = ScanMode.CONTINUOUS
+             isAutoFocusEnabled = true
+-            isFlashEnabled = false
++            isFlashEnabled = true
+ 
+             decodeCallback = DecodeCallback {
+                 runOnUiThread{
+Index: app/src/main/res/layout/activity_code_scanner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:orientation=\"vertical\"\r\n    tools:context=\".activity.CodeScannerActivity\">\r\n\r\n    <com.budiyev.android.codescanner.CodeScannerView\r\n        android:id=\"@+id/scanner\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"550dp\"\r\n        app:autoFocusButtonVisible=\"true\"/>\r\n\r\n    <TextView\r\n        android:id=\"@+id/output_qr\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:text=\"Hasil scan QR\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"20sp\"/>\r\n\r\n</LinearLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_code_scanner.xml b/app/src/main/res/layout/activity_code_scanner.xml
+--- a/app/src/main/res/layout/activity_code_scanner.xml	
++++ b/app/src/main/res/layout/activity_code_scanner.xml	
+@@ -10,8 +10,8 @@
+     <com.budiyev.android.codescanner.CodeScannerView
+         android:id="@+id/scanner"
+         android:layout_width="match_parent"
+-        android:layout_height="550dp"
+-        app:autoFocusButtonVisible="true"/>
++        android:layout_height="700dp"
++        app:autoFocusButtonVisible="false"/>
+ 
+     <TextView
+         android:id="@+id/output_qr"
