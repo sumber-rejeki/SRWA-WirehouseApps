@@ -10,7 +10,7 @@
     <com.budiyev.android.codescanner.CodeScannerView
         android:id="@+id/scanner"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
+        android:layout_height="600dp"
         app:autoFocusButtonVisible="true"/>
 
     <TextView
