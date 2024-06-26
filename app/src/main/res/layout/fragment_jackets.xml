@@ -5,13 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkGrey"
-    android:padding="10dp"
-    tools:context=".ui.JacketsFragment">
-
-    <!-- TODO: Update Jackets fragment layout -->
+    android:padding="10dp">
 
     <EditText
-        android:id="@+id/search_jackets"
+        android:id="@+id/search_boxJackets"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -21,13 +18,12 @@
         android:hint="ID product, name product, etc"
         android:padding="12dp"
         android:paddingBottom="50dp"
-        android:textColor="@color/lightGrey"
-        android:textColorHint="@color/lightGrey"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C0C0C0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <LinearLayout
         android:id="@+id/linearLayoutJackets"
@@ -36,28 +32,36 @@
         android:layout_marginTop="120dp"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-1dp">
-        <!-- Bagian Fabric -->
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Bagian Jackets -->
         <TextView
-            android:id="@+id/jackets_title"
+            android:id="@+id/Jackets_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="Jackets"
-            android:textColor="@color/lightGrey"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <!-- Subtitle Material Details -->
         <TextView
-            android:id="@+id/product_details"
+            android:id="@+id/material_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="Product details"
-            android:textColor="@color/lightGrey"
+            android:text="Material details"
+            android:textColor="#C0C0C0"
             android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Add Item" />
     </LinearLayout>
 
     <TextView
@@ -65,15 +69,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="24/05/2024"
-        android:textColor="@color/lightGrey"
+        android:text="22/05/2024"
+        android:textColor="#FFA500"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_jackets" />
+        app:layout_constraintTop_toBottomOf="@id/search_boxJackets" />
 
     <!-- Tombol Print di kanan bawah tanggal -->
     <Button
-        android:id="@+id/btn_print_jackets"
+        android:id="@+id/btn_print"
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:drawableLeft="@drawable/printicon"
@@ -88,87 +92,97 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
-
     <TableLayout
         android:id="@+id/bar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/outline_background2"
         android:stretchColumns="*"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutJackets"
-        tools:layout_editor_absoluteX="10dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutJackets">
 
-        <TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewId"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text="ID"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewType"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text="Type"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewColor"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_weight="1"
                 android:padding="8dp"
                 android:text="Color"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewQuantity"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:layout_weight="1"
                 android:padding="8dp"
-                android:text="Size"
+                android:text="Qty (m)"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
-                android:text="✓"
+                android:id="@+id/buttonEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:gravity="center"
-
-                />
+                android:textSize="12sp" />
 
             <TextView
-                android:text="✗"
+                android:id="@+id/buttonDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
                 android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
+                android:textSize="12sp" />
 
         </TableRow>
     </TableLayout>
 
     <!-- Baris Header -->
 
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bar"
         app:layout_constraintVertical_bias="0.056">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view2"
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
