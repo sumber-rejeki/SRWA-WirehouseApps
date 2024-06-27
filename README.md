@@ -1,5 +1,3 @@
-<h1 align="center">Studi Independen PT.Stechoq Robotika Indonesia Tim Sumber Rejeki/Kelompok 2</h1>
-
 <p align="center">
   <img width="285" alt="SUMBER REJEKI 1" src="https://github.com/sumber-rejeki/SRWA-WirehouseApps/assets/57589007/e92b7100-752c-402a-871b-8e287e5d306b">
 </p>
