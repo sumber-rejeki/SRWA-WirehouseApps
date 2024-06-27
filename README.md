@@ -72,3 +72,15 @@ https://github.com/sumber-rejeki/SRWA-WirehouseApps/assets/57589007/e8cc43a3-bba
 4. **Login menggunakan akun yang telah terdaftar**
 5. **Akses fitur pemindaian barcode, CRUD barang, dan pemantauan stok melalui aplikasi**
 
+## Peringkat Kontributor
+
+Thanks to these amazing contributors ✨:
+
+<a href="https://github.com/sumber-rejeki/SRWA-WirehouseApps/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=sumber-rejeki/SRWA-WirehouseApps" />
+</a>
+
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+
