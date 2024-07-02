@@ -64,7 +64,7 @@ https://github.com/sumber-rejeki/SRWA-WirehouseApps/assets/57589007/e8cc43a3-bba
 
 1. **Clone repository ini**:
    ```bash
-   git clone https://github.com/username/Sumber-Rejeki-Warehouse-Apps.git
+   git clone https://github.com/sumber-rejeki/SRWA-WirehouseApps.git
 2. **Buka proyek dengan Android Studio**
 3. **Jalankan aplikasi pada emulator atau perangkat fisik**
 4. **Login menggunakan akun yang telah terdaftar**
